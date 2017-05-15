@@ -30,7 +30,7 @@ export class GuestMenu extends React.Component {
                 onClick={this.showSignInModal}
                 type="button"
               >
-                {gettext("Sign in")} DINOTEST
+                {gettext("Sign in66")}
               </button>
 
             </div>
