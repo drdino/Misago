@@ -59,10 +59,10 @@ export class GuestNav extends GuestMenu {
           onClick={this.showSignInModal}
           type="button"
         >
-          {gettext("Sign in")}
+          {gettext("Sign in66664")}
         </button>
         <RegisterButton className="navbar-btn btn-success btn-outline">
-          {gettext("Register")}
+          {gettext("Register3")}
         </RegisterButton>
       </div>
     );
