@@ -6,7 +6,7 @@ import ajax from 'misago/services/ajax';
 import modal from 'misago/services/modal';
 import snackbar from 'misago/services/snackbar';
 import showBannedPage from 'misago/utils/banned-page';
-import browserHistory from 'react-router';
+import { Link } from 'react-router';
 
 export default class extends Form {
   constructor(props) {
@@ -32,7 +32,7 @@ export default class extends Form {
   }
 
   redirectToGoogleOAuth() {
-      browserHistory.push('/admin/oauth/login');
+      // browserHistory.push('/admin/oauth/login');
   }
 
   handleSuccess() {
@@ -113,10 +113,19 @@ export default class extends Form {
             </button>
             <h4 className="modal-title">{gettext("Sign in")}</h4>
           </div>
+
+          <Link
+              to="/admin/oauth/login"
+          >
+              {gettext("Click to login")}
+          </Link>
+
           <form onSubmit={this.redirectToGoogleOAuth}>
             <div className="modal-body">
 
               {gettext("Sign in using Google OAuth2!")}
+
+
 
             </div>
             <div className="modal-footer">
