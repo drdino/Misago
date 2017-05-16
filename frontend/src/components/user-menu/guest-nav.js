@@ -34,13 +34,6 @@ export class GuestMenu extends React.Component {
               </button>
 
             </div>
-            <div className="col-xs-6">
-
-              <RegisterButton className="btn-success btn-block">
-                {gettext("Register")}
-              </RegisterButton>
-
-            </div>
           </div>
         </li>
       </ul>
@@ -59,11 +52,8 @@ export class GuestNav extends GuestMenu {
           onClick={this.showSignInModal}
           type="button"
         >
-          {gettext("Sign in66664")}
+          {gettext("Sign in")}
         </button>
-        <RegisterButton className="navbar-btn btn-success btn-outline">
-          {gettext("Register3")}
-        </RegisterButton>
       </div>
     );
     /* jshint ignore:end */

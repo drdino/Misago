@@ -6,6 +6,7 @@ import ajax from 'misago/services/ajax';
 import modal from 'misago/services/modal';
 import snackbar from 'misago/services/snackbar';
 import showBannedPage from 'misago/utils/banned-page';
+import browserHistory from 'react-router';
 
 export default class extends Form {
   constructor(props) {
@@ -15,45 +16,38 @@ export default class extends Form {
       'isLoading': false,
       'showActivation': false,
 
-      'username': '',
-      'password': '',
-
       'validators': {
-        'username': [],
-        'password': []
       }
     };
   }
 
   clean() {
-    if (!this.isValid()) {
-      snackbar.error(gettext("Fill out both fields."));
-      return false;
-    } else {
-      return true;
-    }
+    return true;
   }
 
   send() {
-    return ajax.post(misago.get('AUTH_API'), {
-      'username': this.state.username,
-      'password': this.state.password
-    });
+    // return ajax.post(misago.get('AUTH_API'), {
+    // });
+
+  }
+
+  redirectToGoogleOAuth() {
+      browserHistory.push('/admin/oauth/login');
   }
 
   handleSuccess() {
     let form = $('#hidden-login-form');
 
-    form.append('<input type="text" name="username" />');
-    form.append('<input type="password" name="password" />');
+    // form.append('<input type="text" name="username" />');
+    // form.append('<input type="password" name="password" />');
 
     // fill out form with user credentials and submit it, this will tell
     // Misago to redirect user back to right page, and will trigger browser's
     // key ring feature
     form.find('input[type="hidden"]').val(ajax.getCsrfToken());
     form.find('input[name="redirect_to"]').val(window.location.pathname);
-    form.find('input[name="username"]').val(this.state.username);
-    form.find('input[name="password"]').val(this.state.password);
+    // form.find('input[name="username"]').val(this.state.username);
+    // form.find('input[name="password"]').val(this.state.password);
     form.submit();
 
     // keep form loading
@@ -119,36 +113,10 @@ export default class extends Form {
             </button>
             <h4 className="modal-title">{gettext("Sign in")}</h4>
           </div>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.redirectToGoogleOAuth}>
             <div className="modal-body">
 
-              <div className="form-group">
-                <div className="control-input">
-                  <input
-                    className="form-control input-lg"
-                    disabled={this.state.isLoading}
-                    id="id_username"
-                    onChange={this.bindInput('username')}
-                    placeholder={gettext("Username or e-mail")}
-                    type="text"
-                    value={this.state.username}
-                  />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <div className="control-input">
-                  <input
-                    className="form-control input-lg"
-                    disabled={this.state.isLoading}
-                    id="id_password"
-                    onChange={this.bindInput('password')}
-                    placeholder={gettext("Password")}
-                    type="password"
-                    value={this.state.password}
-                  />
-                </div>
-              </div>
+              {gettext("Sign in using Google OAuth2!")}
 
             </div>
             <div className="modal-footer">
@@ -159,12 +127,6 @@ export default class extends Form {
               >
                 {gettext("Sign in")}
               </Button>
-              <a
-                className="btn btn-default btn-block"
-                href={misago.get('FORGOTTEN_PASSWORD_URL')}
-              >
-                 {gettext("Forgot password?")}
-              </a>
             </div>
           </form>
         </div>
