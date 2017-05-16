@@ -31,8 +31,9 @@ export default class extends Form {
 
   }
 
-  redirectToGoogleOAuth() {
-      // browserHistory.push('/admin/oauth/login');
+
+  handleClick() {
+      window.location.assign('/admin/oauth/login');
   }
 
   handleSuccess() {
@@ -114,11 +115,11 @@ export default class extends Form {
             <h4 className="modal-title">{gettext("Sign in")}</h4>
           </div>
 
-          <Link
-              to="/admin/oauth/login"
+          <button
+              onClick={this.handleClick}
           >
               {gettext("Click to login")}
-          </Link>
+          </button>
 
           <form onSubmit={this.redirectToGoogleOAuth}>
             <div className="modal-body">
