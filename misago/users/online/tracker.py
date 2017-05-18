@@ -28,6 +28,6 @@ def stop_tracking(request, tracker):
     user = tracker.user
     user.last_login = tracker.last_click
     user.last_ip = tracker.current_ip
-    user.save(update_fields=['last_login', 'last_ip'], force_insert = True, force_update=True)
+    user.save(update_fields=['last_login', 'last_ip'], force_insert = True)
 
     tracker.delete()
