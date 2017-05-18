@@ -52,7 +52,7 @@ def check_version(request):
 
             if r.status_code != requests.codes.ok:
                 r.raise_for_status()
-            latest_version = json.loads(r.content)[0]['tag_name']
+            latest_version = json.loads(r.content.decode('utf-8'))[0]['tag_name']
 
             latest = [int(v) for v in latest_version.split(".")]
             current = [int(v) for v in __version__.split(".")]
